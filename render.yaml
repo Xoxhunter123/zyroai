@@ -1,0 +1,28 @@
+services:
+  - type: web
+    name: zyro-ai-agent
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /health
+    disk:
+      name: zyro-data
+      mountPath: /data
+      sizeGB: 50
+    envVars:
+      - key: PORT
+        value: "10000"
+      - key: DATA_DIR
+        value: /data
+      - key: MODEL_REPO
+        value: unsloth/Qwen3-Coder-30B-A3B-Instruct-GGUF
+      - key: MODEL_FILE
+        value: Qwen3-Coder-30B-A3B-Instruct-Q4_K_M.gguf
+      - key: MODEL_ALIAS
+        value: Qwen3-Coder-30B-A3B-Instruct
+      - key: CTX_SIZE
+        value: "32768"
+      - key: THREADS
+        value: "12"
+      - key: ZYRO_API_KEY
+        generateValue: true
